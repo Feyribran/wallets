@@ -1,0 +1,53 @@
+<p [style.backgroundColor]="'lightblue'">
+  template display the model !
+  {{data}}
+</p>
+
+
+<p [style.color]="favoriteColor">
+  <!-- Attend une variable donc si on veut mettre
+  directement la valeur de la variable,
+  ici un string : " 'green' " -->
+
+  Concatenate strings : {{data + '> MORE TEXT'}}
+</p>
+
+<p [textContent]="data"></p>
+
+More directly:
+<p>
+  {{data}}
+</p>
+
+
+======= Make some cool loops : List ======
+
+<div>
+  <ul>
+    <!-- loop in pseudo HTML -->
+    <li *ngFor="let coin of coins">
+      {{coin.symbol}} => {{coin.price}}
+    </li>
+  </ul>
+</div>
+
+<p>
+======= Make some cool loops : Table ======
+</p>
+
+<div>
+  <!-- name, symbol, price -->
+  <table border="'black'" align="center">
+    <tr [style.backgroundColor]="'lightBlue'">
+      <th> Name </th>
+      <th> Symbol </th>
+      <th> Price </th>
+    </tr>
+    <tr *ngFor="let coin of coins" [style.color]="favoriteColor">
+      <td [style.color]="'black'"> {{coin.name}}</td>
+      <td> {{coin.symbol}}</td>
+      <td> {{coin.price}}</td>
+    </tr>
+  </table>
+</div>
+

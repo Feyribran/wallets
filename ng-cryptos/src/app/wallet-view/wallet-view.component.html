@@ -1,0 +1,63 @@
+<div>
+<p align="center">
+ Add money to your wallet : $
+
+  <input type="number" #amount>
+  <button (click)="deposit(amount.value)">Aboul le cash !</button>
+</p>
+
+<div align="center">
+
+<p>
+=== Buy Other Cryptos ===
+</p>
+
+Symbol: <input #symbol>
+Quantity: <input type="number" #quantity>
+<button (click)="buy(quantity.value,symbol.value)">Buy</button>
+
+</div>
+
+<div align="center">
+
+  <p>
+    === Sell Other Cryptos ===
+  </p>
+
+  Symbol: <input #symbolWallet>
+  Quantity: <input type="number" #quantityWallet>
+  <button (click)="sell(quantityWallet.value,symbolWallet.value)">Sell</button>
+
+</div>
+
+<!-- <app-attributes></app-attributes> //
+on peut faire le lien vers un autre document !-->
+
+<p align="center"> ====== Dans mon wallet ====== </p>
+
+<button (click)="wallet.getLinesOrderedByValue()"align="center">Order</button>
+<button (click)="pricingService.loadPrices()">Update</button>
+
+<div>
+  <!-- name, symbol, price -->
+  <table border="'black'" align="center">
+    <thead [style.backgroundColor]="'lightBlue'">
+      <th> Symbol </th>
+      <th> Quantity </th>
+      <th> $ Value </th>
+    </thead>
+    <tbody *ngFor="let line of wallet.lines" >
+      <td [style.color]=getColor(line.symbol)> {{line.symbol}}</td>
+      <td> {{line.quantity}}</td>
+      <td> {{line.value}}</td>
+    </tbody>
+  </table>
+</div>
+
+<div align="center">
+  <p>Total du Wallet : </p>
+  {{wallet.totalToDollar()}}
+</div>
+
+
+</div>

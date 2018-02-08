@@ -1,0 +1,16 @@
+<p>
+  attributes works au taquet quoi ! Let's have a break !
+
+  <button [disabled]="isDisabled">Click Me</button>
+  <button (click)="toggle()">Toggle my button</button>
+
+  <input name="data" #dataElt> this is html (text) {{dataElt.value}}
+</p>
+
+<div>
+
+  A burger costs : ${{burgerService.getPrice()}}
+  and steak weight is : {{burgerService.steakService.getWeight()}}gr.
+  and contains {{burgerService.saladService.getLeaves()}} leaves of salad.
+  Buns measure : {{height}} cm.
+</div>
