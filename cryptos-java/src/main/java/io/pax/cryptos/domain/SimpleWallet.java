@@ -28,4 +28,9 @@ public class SimpleWallet implements Wallet {
         return id;
     }
 
+    @Override
+    public String toString(){
+        return this.name;
+    }
+
 }

@@ -12,4 +12,11 @@ export class User {
     //protip: always better to initiate an array
     wallets: Wallet[] = [];
 
+  findByName(userId){
+      if (this.id === userId){
+        return this.wallets;
+      }
+
+  }
+
 }

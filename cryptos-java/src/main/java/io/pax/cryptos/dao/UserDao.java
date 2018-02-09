@@ -1,7 +1,6 @@
 package io.pax.cryptos.dao;
 
-import io.pax.cryptos.domain.SimpleUser;
-import io.pax.cryptos.domain.User;
+import io.pax.cryptos.domain.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -116,6 +115,39 @@ public class UserDao {
         return users;
     }
 
+    public User findUserWithWallets(int userId) throws SQLException{
+        Connection connection = this.connector.getConnection();
+        String query = "SELECT * FROM wallet w RIGHT JOIN user u ON w.user_id=u.id WHERE u.id =?";
+
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, userId);
+        ResultSet set = statement.executeQuery();
+
+        User user = null;
+        //pro tip: always init lists
+        List<Wallet> wallets = new ArrayList<>();
+
+        while(set.next()){
+            String userName = set.getString("u.name");
+            System.out.println("userName" + userName);
+            user = new FullUser(userId, userName, wallets);
+
+            int walletId = set.getInt("w.id");
+            String walletName = set.getString("w.name");
+
+            if (walletId>0){
+                Wallet wallet = new SimpleWallet(walletId,walletName);
+                wallets.add(wallet);
+            }
+        }
+
+        statement.execute();
+        statement.close();
+        connection.close();
+
+        return user;
+    }
+
 
     public void updateUser(int userId, String newName) throws SQLException{
         String query = "UPDATE user SET name=? WHERE id=?";
@@ -139,7 +171,8 @@ public class UserDao {
     public static void main(String[] args) throws SQLException {
         UserDao dao = new UserDao();
 
-        dao.deleteUser(4);
+        //dao.deleteUser(4);
+        System.out.println(dao.findUserWithWallets(1));
         //int id = dao.createUser("ArnaudV");
         //dao.deleteByName("ArnaudV");
         //System.out.println(id);
