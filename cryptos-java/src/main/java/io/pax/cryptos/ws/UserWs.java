@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by AELION on 08/02/2018.
  */
-@Path("wallets") //pour avoir /crypto/api/wallets
+@Path("users") //pour avoir /crypto/api/users
 // (api car il n'y a qu'un @ApplicationPath pour
 //toute l'application dans le package)
 @Produces(MediaType.APPLICATION_JSON)
