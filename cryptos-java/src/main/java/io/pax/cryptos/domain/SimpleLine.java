@@ -6,7 +6,11 @@ package io.pax.cryptos.domain;
 public class SimpleLine implements Line {
 
 
-    double getSymbol();
+    public String getSymbol(){
+        return null;
+    }
 
-    double getQuantity();
+    public double getQuantity(){
+        return 0;
+    }
 }

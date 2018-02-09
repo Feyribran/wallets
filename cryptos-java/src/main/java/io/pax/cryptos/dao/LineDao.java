@@ -5,25 +5,7 @@ package io.pax.cryptos.dao;
  */
 public class LineDao {
 
-/*    public DataSource connect() {
-
-        DataSource dataSource;
-
-        try {
-            Context context = new InitialContext();
-            dataSource = (DataSource) context.lookup("java:/cryptos");
-        } catch (NamingException e) {
-            MysqlDataSource mysqlDataSource = new MysqlDataSource();
-            mysqlDataSource.setUser("root");
-            mysqlDataSource.setPassword("");
-            mysqlDataSource.setServerName("localhost");
-            mysqlDataSource.setDatabaseName("cryptos");
-            mysqlDataSource.setPort(3306);
-            dataSource = mysqlDataSource;
-        }
-
-        return dataSource;
-    }*/
+    JdbcConnector connector = new JdbcConnector();
 
 /*
     public boolean hasSymbolLine(int walletIs, String symbol){

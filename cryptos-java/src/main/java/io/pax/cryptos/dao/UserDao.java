@@ -1,13 +1,8 @@
 package io.pax.cryptos.dao;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import io.pax.cryptos.domain.SimpleUser;
 import io.pax.cryptos.domain.User;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,32 +12,14 @@ import java.util.List;
  */
 public class UserDao {
 
-    public DataSource connect(){
-
-        DataSource dataSource;
-
-        try {
-            Context context = new InitialContext();
-            dataSource = (DataSource) context.lookup("java:/cryptos");
-        } catch (NamingException e) {
-            MysqlDataSource mysqlDataSource = new MysqlDataSource();
-            mysqlDataSource.setUser("root");
-            mysqlDataSource.setPassword("");
-            mysqlDataSource.setServerName("localhost");
-            mysqlDataSource.setDatabaseName("cryptos");
-            mysqlDataSource.setPort(3306);
-            dataSource = mysqlDataSource;
-        }
-
-        return dataSource;
-    }
+    JdbcConnector connector = new JdbcConnector();
 
     public List<User> listUsers() throws SQLException{
 
         List<User> users = new ArrayList<>();
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM wallet");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM user");
 
         while (rs.next()){
             String name = rs.getString("name");
@@ -63,7 +40,7 @@ public class UserDao {
 
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1,name);
         //statement.setInt(1,id);
@@ -86,7 +63,7 @@ public class UserDao {
 
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setInt(1,userId);
 
@@ -103,7 +80,7 @@ public class UserDao {
 
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setString(1, name);
 
@@ -118,7 +95,7 @@ public class UserDao {
         List<User> users = new ArrayList<>();
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setString(1, extract + "%");
 
@@ -145,7 +122,7 @@ public class UserDao {
 
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setString(1,newName);
         statement.setInt(2,userId);
@@ -155,6 +132,9 @@ public class UserDao {
         statement.close();
         conn.close();
     }
+
+
+
 
     public static void main(String[] args) throws SQLException {
         UserDao dao = new UserDao();

@@ -1,13 +1,8 @@
 package io.pax.cryptos.dao;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import io.pax.cryptos.domain.SimpleWallet;
 import io.pax.cryptos.domain.Wallet;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,30 +12,12 @@ import java.util.List;
  */
 public class WalletDao {
 
-    public DataSource connect(){
-
-        DataSource dataSource;
-
-        try {
-            Context context = new InitialContext();
-            dataSource = (DataSource) context.lookup("java:/cryptos");
-        } catch (NamingException e) {
-            MysqlDataSource mysqlDataSource = new MysqlDataSource();
-            mysqlDataSource.setUser("root");
-            mysqlDataSource.setPassword("");
-            mysqlDataSource.setServerName("localhost");
-            mysqlDataSource.setDatabaseName("cryptos");
-            mysqlDataSource.setPort(3306);
-            dataSource = mysqlDataSource;
-        }
-
-        return dataSource;
-    }
+    JdbcConnector connector = new JdbcConnector();
 
     public List<Wallet> listWallets() throws SQLException{
 
         List<Wallet> wallets = new ArrayList<>();
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM wallet");
 
@@ -64,7 +41,7 @@ public class WalletDao {
         //query = "INSERT INTO wallet (name, user_id) VALUES(`test`, 2)";
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1,name);
         statement.setInt(2,userId);
@@ -92,7 +69,7 @@ public class WalletDao {
         //query = "INSERT INTO wallet (name, user_id) VALUES('test', 2)";
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setInt(1,walletId);
 
@@ -107,7 +84,7 @@ public class WalletDao {
 
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setString(1, name);
 
@@ -122,7 +99,7 @@ public class WalletDao {
         List<Wallet> wallets = new ArrayList<>();
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setString(1, extract + "%");
 
@@ -149,7 +126,7 @@ public class WalletDao {
 
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setString(1,newName);
         statement.setInt(2,walletId);
@@ -170,7 +147,7 @@ public class WalletDao {
 
         System.out.println(query);
 
-        Connection conn = connect().getConnection();
+        Connection conn = this.connector.getConnection();
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setInt(1,userId);
 
@@ -178,6 +155,8 @@ public class WalletDao {
         statement.close();
         conn.close();
     }
+
+
 
     public static void main(String[] args) throws SQLException {
         WalletDao dao = new WalletDao();
