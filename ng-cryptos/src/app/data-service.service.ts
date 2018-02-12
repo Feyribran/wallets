@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {User} from "./model/user";
 import {HttpClient} from "@angular/common/http";
 import {Wallet} from "./model/wallet";
+import {RequestOptions} from "@angular/http";
 
 @Injectable()
 export class DataService {
@@ -63,7 +64,7 @@ export class DataService {
     let url = 'http://localhost:8080/cryptos/api/wallets/';
 
 
-    console.log('Deleting wallet :' + wallet.name);
+    console.log('Deleting wallet : ' + wallet.name);
 
     return this.http.delete(url,wallet)
       .toPromise()
