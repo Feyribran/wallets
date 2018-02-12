@@ -33,6 +33,8 @@ export class UserListViewComponent implements OnInit {
 
     this.createdWallet.user = user;
     this.createdWallet.name = user.name+ " 's wallet";
+
+
     console.log('You selected ', user);
 
 
@@ -40,6 +42,10 @@ export class UserListViewComponent implements OnInit {
       .fetchUsersWithWallets(user)
       .then(fullUser => this.selectedUser = fullUser)
       .then(console.log);
+  }
+
+  selectedWalletForDelete(wallet:Wallet){
+    this.deletedWallet = wallet;
   }
 
   createWallet(){
@@ -56,7 +62,7 @@ export class UserListViewComponent implements OnInit {
   }
 
   deleteWallet() {
-    return this.dataService.deleteWallet(this.deletedWallet)
-      .then( () => this.selectedUser.wallets.splice(1));
+    return this.dataService.deleteWallet(this.deletedWallet);
+      //.then( () => this.selectedUser.wallets.splice(1));
   }
 }

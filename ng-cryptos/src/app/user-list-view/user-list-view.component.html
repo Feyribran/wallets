@@ -21,9 +21,14 @@
   <h2>User details: {{selectedUser.name}}</h2>
   <ol id="wallet">
     <li *ngFor="let wallet of selectedUser.wallets">
-      {{wallet.name}}
+      {{wallet.name}} :
+      <a href="#{{wallet.id}}" (click)="selectedWalletForDelete(wallet)">{{wallet.id}}</a>
     </li>
   </ol>
+
+  <button (click)="deleteWallet()">
+    Delete Wallet By ID
+  </button>
 
   <h3>Create new Wallet</h3>
 
@@ -39,11 +44,9 @@
   </form>
 
   <form>
-   <!--<input type="text" name="walletToDelete"
-           [(ngModel)]="deletedWallet.id">-->
+    <!--<input type="text" name="walletToDelete"
+          [(ngModel)]="deletedWallet.id">-->
 
-    <button (click)="deleteWallet()">
-      Delete Wallet
-    </button>
+
   </form>
 </div>

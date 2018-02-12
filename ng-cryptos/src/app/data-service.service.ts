@@ -60,7 +60,8 @@ export class DataService {
 }
 
   deleteWallet(wallet:Wallet){
-    let url = 'http://localhost:8080/cryptos/api/wallets/'
+    let url = 'http://localhost:8080/cryptos/api/wallets/';
+
 
     console.log('Deleting wallet :' + wallet.name);
 
