@@ -161,7 +161,9 @@ public class WalletDao {
     public static void main(String[] args) throws SQLException {
         WalletDao dao = new WalletDao();
         //dao.deleteWallet(25);
-        //int id = dao.createWallet(2, "Some cool wallet again");
+        //
+        //
+        int id = dao.createWallet(9, "Some gtest");
         //System.out.println(id);
         //dao.createUser("ArnaudV");
        // dao.updateWallet(35,"Okay");

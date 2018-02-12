@@ -6,6 +6,11 @@ package io.pax.cryptos.domain;
 public class SimpleWallet implements Wallet {
     int id;
     String name;
+    User user;
+
+    public SimpleWallet(){
+
+    }
 
     public SimpleWallet(int id, String name) {
         this.id = id;
@@ -17,11 +22,22 @@ public class SimpleWallet implements Wallet {
         return null;
     }
 
+    public void setUser(User user){
+        this.user = user;
+    }
+
     @Override
     public String getName() {
         return name;
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public int getId() {

@@ -11,6 +11,12 @@
   </ul>
 </div>
 
+<h3>Add new User</h3>
+<form>
+  <input type="text" name="userName" [(ngModel)]="createdUser.name">
+  <button (click)="createUser()">Create new User</button>
+</form>
+
 <div *ngIf="selectedUser">
   <h2>User details: {{selectedUser.name}}</h2>
   <ol id="wallet">
@@ -19,4 +25,25 @@
     </li>
   </ol>
 
+  <h3>Create new Wallet</h3>
+
+  <form>
+    <input type="text" name="walletName"
+           [(ngModel)]="createdWallet.name"
+           (click)="createdWallet.name = '' ">
+
+    <button (click)="createWallet()"
+      [disabled]="createdWallet.name.length<2">
+      Create new Wallet
+    </button>
+  </form>
+
+  <form>
+   <!--<input type="text" name="walletToDelete"
+           [(ngModel)]="deletedWallet.id">-->
+
+    <button (click)="deleteWallet()">
+      Delete Wallet
+    </button>
+  </form>
 </div>

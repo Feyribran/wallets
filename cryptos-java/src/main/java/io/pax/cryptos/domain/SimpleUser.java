@@ -14,6 +14,10 @@ public class SimpleUser implements User {
         this.name = name;
     }
 
+    public SimpleUser(){
+
+    }
+
     @Override
     public List<Wallet> getWallets() {
         return null;
@@ -28,6 +32,14 @@ public class SimpleUser implements User {
     @Override
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
