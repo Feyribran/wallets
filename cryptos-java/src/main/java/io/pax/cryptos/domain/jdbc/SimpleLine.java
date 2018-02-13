@@ -1,4 +1,6 @@
-package io.pax.cryptos.domain;
+package io.pax.cryptos.domain.jdbc;
+
+import io.pax.cryptos.domain.Line;
 
 /**
  * Created by AELION on 08/02/2018.

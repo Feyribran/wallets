@@ -1,4 +1,4 @@
-package io.pax.cryptos.domain;
+package io.pax.cryptos.domain.jdbc;
 
 /**
  * Created by AELION on 12/02/2018.
