@@ -71,8 +71,9 @@ export class DataService {
       name: wallet.name,
       user: wallet.user
     });
+
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({
+    let options = ({
       headers: headers,
       body : body
     });
