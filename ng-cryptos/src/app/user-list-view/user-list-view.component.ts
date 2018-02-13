@@ -32,7 +32,7 @@ export class UserListViewComponent implements OnInit {
     this.selectedUser = user;
 
     this.createdWallet.user = user;
-    this.createdWallet.name = user.name+ " 's wallet";
+    this.createdWallet.name = user.name+ "'s wallet";
 
 
     console.log('You selected ', user);

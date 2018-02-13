@@ -163,7 +163,7 @@ public class WalletDao {
         //dao.deleteWallet(25);
         //
         //
-        int id = dao.createWallet(9, "Some gtest");
+        int id = dao.createWallet(9, "Some test");
         //System.out.println(id);
         //dao.createUser("ArnaudV");
        // dao.updateWallet(35,"Okay");
