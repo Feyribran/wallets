@@ -6,6 +6,5 @@ package io.pax.cryptos.domain;
 public interface Line {
 
     String getSymbol();
-
     double getQuantity();
 }

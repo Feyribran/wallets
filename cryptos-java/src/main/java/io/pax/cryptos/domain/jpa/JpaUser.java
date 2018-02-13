@@ -17,7 +17,7 @@ public class JpaUser implements User {
     int id;
     String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     List<JpaWallet> wallets = new ArrayList<>();
 
     public JpaUser() {

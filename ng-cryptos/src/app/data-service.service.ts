@@ -46,7 +46,7 @@ export class DataService {
     // When posting, we send DATA to the url
     return this.http.post(url, dto)
       .toPromise()
-      .then(data => console.log('Success :) ',data))
+      .then(data => console.log('Success :) ',data));
 
   }
 

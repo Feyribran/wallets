@@ -55,6 +55,7 @@ public class JpaUserDao {
 
         em.getTransaction().commit();
         em.close();
+
         if (users.size() > 0){
             return users.get(0);
         } else {
@@ -79,15 +80,26 @@ public class JpaUserDao {
         }
 
         em.getTransaction().commit();
-        em.close();
     }
 
     public static void main(String[] args) {
         JpaUserDao dao = new JpaUserDao();
 
         dao.createUser("Arthur");
+        User arthur = dao.findByName("Arthur");
 
+        EntityManager em = dao.connector.createEntityManager();
+        em.getTransaction().begin();
 
+        System.out.println("Refinding : " + arthur);
+        //arthur = em.find(JpaUser.class, arthur.getId());
+        arthur = em.merge(arthur);
+
+        System.out.println("Fetching Lazy");
+        System.out.println(arthur.getWallets());
+
+        em.getTransaction().commit();
+        em.close();
         // end of a very long program
         dao.connector.close();
     }
