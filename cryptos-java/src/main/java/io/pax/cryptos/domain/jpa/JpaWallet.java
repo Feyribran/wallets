@@ -38,4 +38,10 @@ public class JpaWallet implements Wallet {
     public int getId() {
         return this.id;
     }
+
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
