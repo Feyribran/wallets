@@ -10,11 +10,11 @@ import javax.persistence.Persistence;
  * Wrap factory
  */
 public class JpaConnector {
-    EntityManagerFactory factory;
+    static EntityManagerFactory factory;
 
     void connect() {
-        if (this.factory == null) {
-            this.factory = Persistence.createEntityManagerFactory("cryptos");
+        if (factory == null) {
+            factory = Persistence.createEntityManagerFactory("cryptos");
         }
     }
 
@@ -25,7 +25,7 @@ public class JpaConnector {
     }
 
     public void close() {
-        this.factory.close();
+        factory.close();
     }
 
 

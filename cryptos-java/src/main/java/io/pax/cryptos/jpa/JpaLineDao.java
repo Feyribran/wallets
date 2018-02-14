@@ -18,12 +18,11 @@ public class JpaLineDao {
         JpaUser kenny = userDao.createUser("Kenny");
         JpaWallet wallet = kenny.getWallets().get(0);
 
-        JpaLineDao dao = new JpaLineDao();
-        EntityManager em = dao.connector.createEntityManager();
+        JpaLineDao lineDao = new JpaLineDao();
+        EntityManager em = lineDao.connector.createEntityManager();
 
         em.getTransaction().begin();
 
-        //kenny = em.merge(kenny);
         wallet = em.merge(wallet);
 
         JpaLine lineBtc = new JpaLine();
@@ -42,10 +41,9 @@ public class JpaLineDao {
 
         // Commit and close
         em.getTransaction().commit();
-
         em.close();
-
-        dao.connector.close();
+        lineDao.connector.close();
+        //userDao.connector.close();
 
 
     }
